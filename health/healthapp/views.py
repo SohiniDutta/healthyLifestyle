@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from healthapp.models import contactModel,userModel
-from healthapp.forms import registerForm
+from healthapp.forms import registerForm,promptForm
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
+from healthapp.utils import generate_text
 
 # Create your views here.
 def index(request):
@@ -102,4 +103,17 @@ def register(request):
 def bmi(request):
 
     return render(request,'bmi.html')
-   
+
+def message(request):
+    form = promptForm()
+    if request.method=='POST':
+        form = promptForm(request.POST)
+        if form.is_valid():
+           
+            generated = generate_text(form.cleaned_data['prompt'])
+            return render(request,'chat.html',{'form':form,'generated':generated})
+        else:
+
+            return render(request,'chat.html',{'form':form})
+    else:
+         return render(request,'chat.html',{'form':form})

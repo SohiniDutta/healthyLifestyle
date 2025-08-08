@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Text Generator</title>
+</head>
+<body>
+    <h1>Creative AI Text Generator</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if generated %}
+    <h3>AI Output:</h3>
+    <p>{{ generated }}</p>
+    {% endif %}
+</body>
+</html>
