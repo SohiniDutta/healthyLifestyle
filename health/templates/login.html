@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body_block %}
+
+{% load static %}
+<section id="features">
+    <div class="container">
+        <header>
+            <h2>Login</h2>
+        </header>
+        <div class="row aln-center">
+            <div class="col-6 col-6-medium col-12-small">
+
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="username">Enter Username :</label>
+                      <input type="email" name="email"  class="form-control"/>
+                    <label for="password">Enter Password :</label>
+                      <input type="password" name="password"    class="form-control"/>
+                    <hr />
+                      <input type="submit" value="SUBMIT" />
+                      {% if error %}
+                       <p style="color:red">{{error}}</p>
+                      
+                    {% endif %}
+                </form>
+                <p>Not Registered ? <a href="{% url 'register' %}">Click To Register </a> </p>
+
+            </div>
+         
+      
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}
