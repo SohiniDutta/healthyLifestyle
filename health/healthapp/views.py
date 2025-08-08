@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from healthapp.utils import generate_text
+from healthapp.utils import ques_answer,generate_text
 
 # Create your views here.
 def index(request):
@@ -111,9 +111,13 @@ def message(request):
         if form.is_valid():
            
             generated = generate_text(form.cleaned_data['prompt'])
+            
+
+           # generated = ques_answer({'question':form.cleaned_data['prompt'],'context':form.cleaned_data['context']})
             return render(request,'chat.html',{'form':form,'generated':generated})
         else:
 
             return render(request,'chat.html',{'form':form})
     else:
          return render(request,'chat.html',{'form':form})
+

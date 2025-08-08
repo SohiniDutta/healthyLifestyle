@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Text Generator</title>
-</head>
-<body>
-    <h1>Creative AI Text Generator</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Generate</button>
-    </form>
+{% extends 'base.html' %}
+{% block body_block %}
 
-    {% if generated %}
-    <h3>AI Output:</h3>
-    <p>{{ generated }}</p>
-    {% endif %}
-</body>
-</html>
+{% load static %}
+<section id="features">
+    <div class="container">
+        <header>
+            <h2>Type Anything </h2>
+        </header>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Generate</button>
+        </form>
+
+        {% if generated %}
+        <h3> Output:</h3>
+        <p>{{ generated }}</p>
+        {% endif %}
+    </div>
+
+</section>
+
+
+{% endblock %}
